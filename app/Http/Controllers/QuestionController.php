@@ -21,7 +21,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions=Question::where('admin_id',Auth::id())->paginate(5);
+        $questions=Question::where('admin_id',Auth::id())->orderBy('course_id','asc')->paginate(5);
         return view('question.index')->withQuestions($questions);
     }
 

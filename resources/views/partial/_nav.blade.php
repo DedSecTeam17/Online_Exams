@@ -1,36 +1,56 @@
 <!-- START NAV -->
-<nav class="navbar is-light  " >
-    <div class="container">
-        <div class="navbar-brand">
-            <a class="navbar-item brand-text" href="../">
-                Sust Admin
-            </a>
-            <div class="navbar-burger burger" data-target="navMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        <div id="navMenu" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="admin.html">
-                    Home
+@if(\Illuminate\Support\Facades\Auth::guard('web')->check() ||  \Illuminate\Support\Facades\Auth::guard('admin')->check())
+    <nav class="navbar is-dark  " >
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item brand-text" href="#">
+                    Sust Online Exams
                 </a>
-                @if(\Illuminate\Support\Facades\Auth::guard('admin')->check())
+                <div class="navbar-burger burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+
+                    @if(\Illuminate\Support\Facades\Auth::guard('web')->check())
+                        <a class="navbar-item" href="/home">
+                            Exams
+                        </a>
+
+                    @else
+
+                        <a class="navbar-item" href="/home">
+                            Home
+                        </a>
+
+                    @endif
+
+
+
                     <a  class="navbar-item" href="{{ route('logout') }} "
-                       onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
                         Logout
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
-                    @endif
-            </div>
 
+                </div>
+
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+    @else
+
+
+
+
+
+    @endif
 
 <!-- END NAV -->
 

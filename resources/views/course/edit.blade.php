@@ -13,6 +13,12 @@
                         {!!Form::model($course, array('route' => array('courses.update', $course->id), 'files' => true, 'method' => 'PUT')) !!}
                         {{ Form::label('title','Course Name :')   }}
                         {{Form::text('name',null,array('class'=>'input is-rounded','id'=>'first','maxlength'=>'255'))}}
+                        <div class="select is-rounded" >
+                            <select name="available">
+                                <option value="{{true}}">available</option>
+                                <option value="{{false}}">not available</option>
+                            </select>
+                        </div>
                         {{Form::submit('Update',array('class'=>'button is-success is-rounded is-fullwidth is-outlined ','style'=>'margin-top:2%','id'=>'mybtn'))}}
                         {!!Form::close()  !!}
                     </div>

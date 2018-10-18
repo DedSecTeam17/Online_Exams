@@ -4,20 +4,28 @@
     @yield('stylesheet')
     <style>
         h2{
-            font-family: 'Merienda', cursive;
+            font-family: 'Amiri', serif;
 
         }
         p{
-            font-family: 'Merienda', cursive;
+            font-family: 'Amiri', serif;
 
         }
         a{
-            font-family: 'Merienda', cursive;
+            font-family: 'Amiri', serif;
 
         }
         button{
-            font-family: 'Merienda', cursive;
+            font-family: 'Amiri', serif;
 
+        }
+        li{
+            font-family: 'Amiri', serif;
+
+        }
+
+        table{
+            font-family: 'Indie Flower', cursive;
         }
 
 
@@ -26,13 +34,37 @@
 <body >
 @include('partial._nav')
 <div class="container-fluid" style="   background-color: #e8e8e8;">
-    <div class="columns">
+
+
+    <div class="columns is-desktop">
         {{--Aside area here --}}
-        @include('partial._aside_nav')
-        <div class="column is-9">
-        @yield('content')
+
+
+
+
+
+        @if(\Illuminate\Support\Facades\Auth::guard('admin')->check())
+            <div class="column is-10">
+                @include('partial._message')
+                @yield('content')
+
+            </div>
+        <div class="column is-2 aside">
+            @include('partial._aside_nav')
         </div>
+            @else
+
+            <div class="column is-8 is-offset-2">
+                @include('partial._message')
+                @yield('content')
+            </div>
+
+        @endif
+
+
+
     </div>
+    @include('partial._footer')
 </div>
 {{--Custom JS --}}
 
@@ -45,7 +77,6 @@
 
         // Check if there are any navbar burgers
         if ($navbarBurgers.length > 0) {
-
             // Add a click event on each of them
             $navbarBurgers.forEach( el => {
                 el.addEventListener('click', () => {

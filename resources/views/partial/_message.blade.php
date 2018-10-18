@@ -1,5 +1,5 @@
 
-@if(Session::has('success'))
+@if(\Illuminate\Support\Facades\Session::has('success'))
     <article class="message is-info" style="margin-top: 5%">
         <div class="message-header">
             Info

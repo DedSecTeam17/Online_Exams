@@ -1,53 +1,69 @@
+<style>
+
+    i{
+        color: #29f1c3;
+    }
 
 
 
-@if(\Illuminate\Support\Facades\Auth::guard('admin')->check())
+</style>
 
-    <div class="column is-3" style="background-color: white; margin-left: 1%; margin-top: 0.5%">
-        <aside class="menu">
-            <ul class="menu-list">
-                <li><a class="is-active">Admin Dashboard</a></li>
-            </ul>
-            <ul class="menu-list">
-                <li>
-                    <a><i class="fas fa-user-graduate " style="font-size: xx-large"></i></a>
-                    <ul>
-                        <li><a>All students</a></li>
-                        <li><a href="../register">Add new Students</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="menu-list">
-                <li>
-                    <a><i class="fas fa-book-reader" style="font-size: xx-large"></i></a>
-                    <ul>
-                        <li><a href="{{route('courses.index')}}">All Courses</a></li>
-                        <li><a href="{{route('courses.create')}}">Add new Courses</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="menu-list">
-                <li>
-                    <a><i class="fas fa-question-circle" style="font-size: xx-large"></i></a>
-                    <ul>
-                        <li><a href="{{route('questions.index')}}">All Questions</a></li>
-                        <li><a href="{{route('questions.create')}}">Add new Questions</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="menu-list">
-                <li>
-                    <a><i class="fab fa-readme" style="font-size: xx-large"></i></a>
-                    <ul>
-                        <li><a>All Results</a></li>
-                        <li><a>Reports</a></li>
-                    </ul>
-                </li>
 
-            </ul>
-        </aside>
+
+
+<div class="box">
+    <div class="box-body">
+        <nav class="navbar ">
+            <aside class="menu " style="color: white">
+                <ul class="menu-list">
+                    <li><a class="is-active">Admin Dashboard</a></li>
+                </ul>
+                <ul class="menu-list">
+                    <li>
+                        <a><i class="fas fa-user-graduate " style="font-size: xx-large"></i></a>
+                        <ul>
+                            <li><a href="{{route('students.index')}}" >كل الطلاب</a></li>
+                            <li><a href="../register">اضافه طالب جديد</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="menu-list">
+                    <li>
+                        <a><i class="fas fa-book-reader" style="font-size: xx-large"></i></a>
+                        <ul>
+                            <li><a href="{{route('courses.index')}}">الكورسات</a></li>
+                            <li><a href="{{route('courses.create')}}">اضافه كورس</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="menu-list">
+                    <li>
+                        <a><i class="fas fa-question-circle" style="font-size: xx-large"></i></a>
+                        <ul>
+                            <li><a href="{{route('questions.index')}}">اسئله الامتحانات</a></li>
+                            <li><a href="{{route('questions.create')}}">اضافه سؤال</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="menu-list">
+                    <li>
+                        <a><i class="fab fa-readme" style="font-size: xx-large"></i></a>
+                        <ul>
+                            <li><a href="{{route('results.index')}}">النتائج</a></li>
+                            <li><a>التقارير</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </aside>
+        </nav>
+
     </div>
-    @endif
+
+</div>
+
+
+
 
 
 

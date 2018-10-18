@@ -25,8 +25,17 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
 });
-
-
 Route::Resource('/courses','CourseController');
 Route::Resource('/questions','QuestionController');
+
+Route::Resource('/students','UserController');
+
+Route::Resource('/results','ResultController');
+
+
+
+Route::get('/students/exam/{course_id}',['uses'=>'UserController@takeExam','as'=>'students.exam']);
+Route::post('/students/exam/store/{course_id}',['uses'=>'UserController@storeAnswer','as'=>'students.exam.store']);
+
+
 

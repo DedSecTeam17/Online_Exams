@@ -13,6 +13,13 @@
                     {!! Form::open(array('route'=>'courses.store','data-parsley-validate'=>''))  !!}
                     {{ Form::label('title','Course Name :')   }}
                     {{Form::text('name',null,array('class'=>'input is-rounded','id'=>'first','maxlength'=>'255'))}}
+                    {{ Form::label('title','Availability:')   }}<br>
+                    <div class="select is-rounded" >
+                        <select name="available">
+                            <option value="{{true}}">available</option>
+                            <option value="{{false}}">not available</option>
+                        </select>
+                    </div>
                     {{Form::submit('Add',array('class'=>'button is-success is-rounded is-fullwidth is-outlined ','style'=>'margin-top:2%','id'=>'mybtn'))}}
                     {!! Form::close()  !!}
                 </div>

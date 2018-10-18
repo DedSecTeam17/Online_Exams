@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
+use App\Result;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CourseController extends Controller
+class ResultController extends Controller
 {
-
-
 
     public function __construct()
     {
-        $this->middleware("auth:admin");
+        $this->middleware('auth:admin')->except('show');
+        $this->middleware('auth:web')->except('index','edit','store','destroy','update');
     }
+
 
     /**
      * Display a listing of the resource.
@@ -23,9 +22,9 @@ class CourseController extends Controller
      */
     public function index()
     {
+        $results=Result::paginate(5);
+        return view('result.index')->withResults($results);
         //
-        $courses=Course::where('admin_id',Auth::id())->paginate(5);
-        return view('course.index')->withCourses($courses);
     }
 
     /**
@@ -35,10 +34,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-
-
-
-        return view("course.create");
+        //
     }
 
     /**
@@ -49,16 +45,6 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'name'=>'required',
-        ]);
-        $course=new Course();
-        $course->name=$request->name;
-        $course->admin_id=Auth::id();
-        $course->available=$request->available;
-        $course->save();
-        return redirect()->route('courses.index');
-
         //
     }
 
@@ -70,6 +56,11 @@ class CourseController extends Controller
      */
     public function show($id)
     {
+
+        $result=Result::find($id);
+
+
+        return view('show_result')->withResult($result);
         //
     }
 
@@ -81,8 +72,6 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $course=Course::find($id);
-        return view('course.edit')->withCourse($course);
         //
     }
 
@@ -95,32 +84,17 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $this->validate($request,[
-            'name'=>'required',
-        ]);
-        $course=Course::find($id);
-        $course->name=$request->name;
-        $course->admin_id=Auth::id();
-        $course->available=$request->available;
-        $course->update();
-        return redirect()->route('courses.index');
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
-     * @throws \Exception
      */
     public function destroy($id)
     {
-        $course=Course::find($id);
-        $course->delete();
-        return redirect()->route('courses.index');
-
         //
     }
 }

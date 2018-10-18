@@ -10,6 +10,7 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Availability</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -19,6 +20,13 @@
                         <tr>
                             <td>{{$course->id}}</td>
                             <td>{{$course->name}}</td>
+                            <td>
+                                @if($course->available==true)
+                                    {{'متاح للامتحان'}}
+                                    @else
+                                    {{'غير متاح للامتحان'}}
+                                @endif
+                            </td>
                             <td><a class="button is-info is-outlined" href="{{route('courses.edit',$course->id)}}">Update</a></td>
                             <td>
                                 {{Form::open(['route'=>['courses.destroy',$course->id],'method'=>'delete'])}}
