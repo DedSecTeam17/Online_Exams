@@ -3,39 +3,48 @@
 @section('content')
     <div class="columns is-mobile" style="margin-top: 1%">
         <div class="column is-6 is-offset-3">
+            <div class="box">
+                <div class="box-content text-center">
+                    <P>بسم الله الرحمن الرحيم</P>
+                    <P>جامعه السودان للعلوم والتكنولوجا</P>
+                    <P>قسم علوم الحاسوب وتقانه المعلومات</P>
+                </div>
+            </div>
             {!! Form::open(array('route'=>['students.exam.store',$course_id],'data-parsley-validate'=>'','method'=>'POST'))  !!}
             <div class="box">
                 <div class="box-content">
                     <div class="text-center">
-                        {{$exam_questions->count().'questions Good luck !!'}}
-
                         @foreach($exam_questions as $eq)
-                            <h1>{{$eq->question_name}}<i class="fas fa-question"></i></h1>
+                            <h1 ><b>{{$eq->question_name}}<i class="fas fa-question"></i></b></h1>
                             <ul>
                                 <li>
                                     <label class="radio">
-                                        <input type="radio" name="{{'answer'.$eq->id}}" value="A">
+                                        <span>A-</span>
                                         {{$eq->choice_a}}
+                                        <input type="radio" name="{{'answer'.$eq->id}}" value="A">
                                     </label>
                                 </li>
                                 <li>
                                     <label class="radio">
-                                        <input type="radio" name="{{'answer'.$eq->id}}" value="B">
+                                        <span>B-</span>
                                         {{$eq->choice_b}}
+                                        <input type="radio" name="{{'answer'.$eq->id}}" value="B">
                                     </label>
                                 </li>
 
                                 <li>
                                     <label class="radio">
-                                        <input type="radio" name="{{'answer'.$eq->id}}" value="C">
+                                        <span>C-</span>
                                         {{$eq->choice_c}}
+                                        <input type="radio" name="{{'answer'.$eq->id}}" value="C">
                                     </label>
                                 </li>
 
                                 <li>
                                     <label class="radio">
-                                        <input type="radio" name="{{'answer'.$eq->id}}" value="D">
+                                        <span>D-</span>
                                         {{$eq->choice_d}}
+                                        <input type="radio" name="{{'answer'.$eq->id}}" value="D">
                                     </label>
                                 </li>
                             </ul>

@@ -4,28 +4,23 @@
 @section('content')
     <div style="margin-top: 10%">
         <div class="columns">
-            {{--offset--}}
-            <div class="column is-one-fifth">
-            </div>
-            <div class="column is-half">
+            <div class="column is-6 is-offset-3">
                 <div class="box">
                     <div class="box-content">
                         {!!Form::model($course, array('route' => array('courses.update', $course->id), 'files' => true, 'method' => 'PUT')) !!}
-                        {{ Form::label('title','Course Name :')   }}
+                        {{ Form::label('title','اسم الكورس',['class'=>'is-pulled-right'])   }}
                         {{Form::text('name',null,array('class'=>'input is-rounded','id'=>'first','maxlength'=>'255'))}}
-                        <div class="select is-rounded" >
+                        {{ Form::label('title','التوفر:',['class'=>'is-pulled-right'])   }}<br>
+                        <div class="select is-rounded is-fullwidth" >
                             <select name="available">
-                                <option value="{{true}}">available</option>
-                                <option value="{{false}}">not available</option>
+                                <option value="{{true}}">متاح</option>
+                                <option value="{{false}}">غير متاح</option>
                             </select>
                         </div>
-                        {{Form::submit('Update',array('class'=>'button is-success is-rounded is-fullwidth is-outlined ','style'=>'margin-top:2%','id'=>'mybtn'))}}
+                        {{Form::submit('تعديل',array('class'=>'button is-info is-rounded is-fullwidth  ','style'=>'margin-top:2%','id'=>'mybtn'))}}
                         {!!Form::close()  !!}
                     </div>
                 </div>
-            </div>
-            {{--offset--}}
-            <div class="col-md-2">
             </div>
         </div>
     </div>

@@ -49,7 +49,7 @@
                 @yield('content')
 
             </div>
-        <div class="column is-2 aside">
+        <div class="column is-2 aside" style="width: 100%; background-color: white">
             @include('partial._aside_nav')
         </div>
             @else
@@ -66,6 +66,7 @@
     </div>
     @include('partial._footer')
 </div>
+
 {{--Custom JS --}}
 
 @include('partial._javascript')

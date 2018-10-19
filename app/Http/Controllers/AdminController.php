@@ -1,5 +1,9 @@
 <?php
 namespace App\Http\Controllers;
+use App\Course;
+use App\Question;
+use App\Result;
+use App\User;
 use Illuminate\Http\Request;
 class AdminController extends Controller
 {
@@ -19,6 +23,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        $students=User::all();
+        $courses=Course::all();
+        $questions=Question::all();
+        $results=Result::all();
+
+        return view('admin')->withStudents($students)->withCourses($courses)->withQuestions($questions)->withResults($results);
     }
 }

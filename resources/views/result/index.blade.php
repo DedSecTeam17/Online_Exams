@@ -1,3 +1,8 @@
+<style>
+    .table__wrapper {
+        overflow-x: auto;
+    }
+</style>
 @extends('pages.main')
 @section('title','AllPosts')
 @section('content')
@@ -5,8 +10,9 @@
     <div class="column is-6 is-offset-3">
         <div class="box">
             <div class="box-content">
-                <table class="table ">
-                    <thead class="thead-dark">
+                <div class="table__wrapper">
+                    <table class="table ">
+                        <thead class="thead-dark">
                         <tr>
                             <th>#</th>
                             <th>اسم الطالب</th>
@@ -14,20 +20,22 @@
                             <th>الكورس</th>
                             <th>الدرجه</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         @foreach($results as $result)
-                        <tr>
-                            <td>{{$result->id}}</td>
-                            <td>{{$result->user->name}}</td>
-                            <td>{{$result->user->email}}</td>
-                            <td>{{$result->course->name}}</td>
-                            <td>{{$result->result}}</td>
+                            <tr>
+                                <td>{{$result->id}}</td>
+                                <td>{{$result->user->name}}</td>
+                                <td>{{$result->user->email}}</td>
+                                <td>{{$result->course->name}}</td>
+                                <td>{{$result->result}}</td>
 
-                        </tr>
+                            </tr>
                         @endforeach
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+
                 <div class="text-center">
                     <nav>
                         <ul class="pagination justify-content-end">

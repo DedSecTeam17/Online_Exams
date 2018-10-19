@@ -1,5 +1,5 @@
-<footer class="footer" style="margin-top: 1%" >
-    <div class="container">
+<footer class="footer" style="background-color: white" >
+    <div class="container ">
         <div class="content has-text-centered">
             <p>
                 <a href="">

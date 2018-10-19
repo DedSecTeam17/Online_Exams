@@ -18,7 +18,7 @@ class UserController extends Controller
         $this->middleware("auth:admin")->except('takeExam','storeAnswer');
 
 
-        $this->middleware('auth:web')->except('index','create','edit','delete','show');
+        $this->middleware('auth:web')->except('index','create','edit','destroy','show','update');
     }
     /**
      * Display a listing of the resource.
@@ -63,7 +63,6 @@ class UserController extends Controller
         $result->course_id=$course_id;
 
             $result->save();
-
 
         Session::flash('success', 'Success you submit the exam successfully');
         return redirect()->route('results.show',$result->id);

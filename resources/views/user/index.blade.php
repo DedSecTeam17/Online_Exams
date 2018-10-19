@@ -29,11 +29,11 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
 
-                                    <td><a class="button is-info is-outlined"
-                                           href="{{route('students.edit',$user->id)}}">Update</a></td>
+
+                                    <td><a class="button is-info " href="{{route('students.edit',$user->id)}}"><img src="{{asset('img/update.png')}}" height="30" width="30"></a></td>
                                     <td>
                                         {{Form::open(['route'=>['students.destroy',$user->id],'method'=>'delete'])}}
-                                        {{ Form::submit('Delete',array("class"=>"button is-danger is-rounded is-outlined is-fullwidth",'style'=>'margin-top:3%')) }}
+                                        <button type="submit" class="button is-danger "><img src="{{asset('img/delete.png')}}" height="30" width="30"></button>
                                         {{Form::close()}}
                                     </td>
                                 </tr>

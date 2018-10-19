@@ -7,8 +7,8 @@
 @extends('pages.main')
 @section('title','AllPosts')
 @section('content')
-<div class="columns is-mobile" style="margin-top: 1%; margin-left: 2%">
-    <div class="column is-11 ">
+    <div class="columns is-desktop" style="margin: 3%">
+        <div class="column is-9 is-offset-1">
         <div class="box box-shadow">
             <div class="box-content">
                 <div class="table__wrapper">
@@ -39,10 +39,11 @@
                                 <td>{{$question->answer}}</td>
                                 <td>{{$question->course->name}}</td>
 
-                                <td><a class="button is-info is-outlined" href="{{route('questions.edit',$question->id)}}">Update</a></td>
+
+                                <td><a class="button is-info " href="{{route('questions.edit',$question->id)}}"><img src="{{asset('img/update.png')}}" height="30" width="30"></a></td>
                                 <td>
                                     {{Form::open(['route'=>['questions.destroy',$question->id],'method'=>'delete'])}}
-                                    {{ Form::submit('Delete',array("class"=>"button is-danger is-rounded is-outlined is-fullwidth",'style'=>'margin-top:3%')) }}
+                                    <button type="submit" class="button is-danger "><img src="{{asset('img/delete.png')}}" height="30" width="30"></button>
                                     {{Form::close()}}
                                 </td>
                             </tr>
