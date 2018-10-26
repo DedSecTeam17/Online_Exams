@@ -4,6 +4,8 @@
 @section('content')
 
 
+@include('partial.tabs')
+
     <div class="columns is-desktop" style="margin-top: 1%">
         <div class="column is-6 is-offset-3">
             <div class="box">

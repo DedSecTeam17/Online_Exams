@@ -1,48 +1,16 @@
 <html>
 <head>
     @include('partial._header')
-    @yield('stylesheet')
-    <style>
-        h2{
-            font-family: 'Amiri', serif;
-
-        }
-        p{
-            font-family: 'Amiri', serif;
-
-        }
-        a{
-            font-family: 'Amiri', serif;
-
-        }
-        button{
-            font-family: 'Amiri', serif;
-
-        }
-        li{
-            font-family: 'Amiri', serif;
-
-        }
-
-        table{
-            font-family: 'Indie Flower', cursive;
-        }
 
 
-    </style>
 </head>
 <body >
 @include('partial._nav')
-<div class="container-fluid" style="   background-color: #e8e8e8;">
+<div class="container-fluid" style="background-color: whitesmoke">
 
 
     <div class="columns is-desktop">
         {{--Aside area here --}}
-
-
-
-
-
         @if(\Illuminate\Support\Facades\Auth::guard('admin')->check())
             <div class="column is-10">
                 @include('partial._message')

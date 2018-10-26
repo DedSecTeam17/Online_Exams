@@ -17,5 +17,10 @@ class Course extends Model
         return $this->hasMany(Result::class);
     }
 
+    public  function  semester()
+    {
+        return $this->belongsTo(Semester::class);
+    }
+
 
 }

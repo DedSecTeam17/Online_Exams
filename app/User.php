@@ -27,10 +27,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public  function  results()
     {
         return $this->hasMany(Result::class);
+    }
+
+    public  function  semester()
+    {
+        return $this->belongsTo(Semester::class);
     }
 
 }

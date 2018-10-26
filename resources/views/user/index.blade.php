@@ -18,6 +18,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>His Semester</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -28,11 +29,10 @@
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-
-
-                                    <td><a class="button is-info " href="{{route('students.edit',$user->id)}}"><img src="{{asset('img/update.png')}}" height="30" width="30"></a></td>
+                                    <td>{{$user->semester->name}}</td>
+                                    <td><a class="button is-info " href="{{route('users.edit',$user->id)}}"><img src="{{asset('img/update.png')}}" height="30" width="30"></a></td>
                                     <td>
-                                        {{Form::open(['route'=>['students.destroy',$user->id],'method'=>'delete'])}}
+                                        {{Form::open(['route'=>['users.destroy',$user->id],'method'=>'delete'])}}
                                         <button type="submit" class="button is-danger "><img src="{{asset('img/delete.png')}}" height="30" width="30"></button>
                                         {{Form::close()}}
                                     </td>

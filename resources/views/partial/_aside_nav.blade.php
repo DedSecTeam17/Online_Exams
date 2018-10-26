@@ -14,14 +14,11 @@
                     <li>
                         <a id="student"> <img src="{{asset('img/students.png')}}" width="30" height="30"> </a>
                         <ul id="student_toggle">
-                            <li><a href="{{route('students.index')}}" >كل الطلاب</a></li>
-                            <li><a href="../register">اضافه طالب جديد</a></li>
+                            <li><a href="{{route('users.index')}}" >كل الطلاب</a></li>
+                            <li><a href="{{route('users.create')}}">اضافه طالب جديد</a></li>
                         </ul>
                     </li>
                 </ul>
-
-
-
                 <ul class="menu-list">
                     <li>
                         <a  id="course"><img src="{{asset('img/course.png')}}" width="30" height="30"></a>
@@ -31,9 +28,6 @@
                         </ul>
                     </li>
                 </ul>
-
-
-
                 <ul class="menu-list">
                     <li>
                         <a id="questions"><img src="{{asset('img/questions.png')}}" width="30" height="30"></a>

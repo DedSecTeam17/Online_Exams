@@ -12,7 +12,7 @@
                         <figure class="avatar">
                             <i class="fas fa-graduation-cap" style="font-size: xx-large"></i>
                         </figure>
-                        <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('users.store') }}">
                             {{ csrf_field() }}
                             <div class="control{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-4 control-label">Full Name</label>
@@ -61,6 +61,16 @@
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="input is-rounded is-fullwidth" name="password_confirmation" required>
                                 </div>
+                            </div>
+
+
+                            {{ Form::label('title','semester:',['class'=>'is-pulled-left'])   }}<br>
+                            <div class="select is-rounded is-fullwidth" >
+                                <select name="semester_id">
+                                    @foreach($semesters as $semester)
+                                        <option value="{{$semester->id}}">{{$semester->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="control" style="margin-top: 5%">

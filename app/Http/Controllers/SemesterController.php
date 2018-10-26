@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
 use App\Semester;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CourseController extends Controller
+class SemesterController extends Controller
 {
-
 
 
     public function __construct()
     {
-        $this->middleware("auth:admin");
+        $this->middleware('auth:admin');
     }
 
     /**
@@ -24,9 +22,11 @@ class CourseController extends Controller
      */
     public function index()
     {
+
+        $semesters=Semester::paginate(5);
+
+        return view('semester.index')->withSemesters($semesters);
         //
-        $courses=Course::where('admin_id',Auth::id())->paginate(5);
-        return view('course.index')->withCourses($courses);
     }
 
     /**
@@ -36,13 +36,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-
-
-        $semesters=Semester::where('admin_id',Auth::id())->get();
-
-        return view("course.create")->withSemesters(
-            $semesters
-        );
+        return view('semester.create');
+        //
     }
 
     /**
@@ -54,16 +49,13 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name'=>'required',
+            'name'=>'required | min:3 | max:20'
         ]);
-        $course=new Course();
-        $course->name=$request->name;
-        $course->semester_id=$request->semester_id;
-        $course->admin_id=Auth::id();
-        $course->available=$request->available;
-        $course->save();
-        return redirect()->route('courses.index');
-
+        $semester=new Semester();
+        $semester->name=$request->name;
+        $semester->admin_id=Auth::id();
+        $semester->save();
+        return redirect()->route('semesters.index');
         //
     }
 
@@ -75,9 +67,6 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-
-        $course=Course::find($id);
-        return view('course.show')->withCourse($course);
         //
     }
 
@@ -89,12 +78,8 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $semesters=Semester::where('admin_id',Auth::id())->get();
-
-        $course=Course::find($id);
-        return view('course.edit')->withCourse($course)->withSemesters(
-            $semesters
-        );
+        $semester=Semester::find($id);
+        return view('semester.edit')->withSemester($semester);
         //
     }
 
@@ -107,17 +92,14 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->validate($request,[
-            'name'=>'required',
+            'name'=>'required | min:3 | max:20'
         ]);
-        $course=Course::find($id);
-        $course->name=$request->name;
-        $course->semester_id=$request->semester_id;
-        $course->admin_id=Auth::id();
-        $course->available=$request->available;
-        $course->update();
-        return redirect()->route('courses.index');
+        $semester=Semester::find($id);
+        $semester->name=$request->name;
+        $semester->admin_id=Auth::id();
+        $semester->update();
+        return redirect()->route('semesters.index');
         //
     }
 
@@ -130,10 +112,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        $course=Course::find($id);
-        $course->delete();
-        return redirect()->route('courses.index');
-
+        $semester=Semester::find($id);
+        $semester->delete();
+        return redirect()->route('semesters.index');
         //
     }
 }

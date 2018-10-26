@@ -17,28 +17,18 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Availability</th>
-                            <th>Semester</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($courses as $course)
+                        @foreach($semesters as $semester)
                             <tr>
-                                <td>{{$course->id}}</td>
-                                <td>{{$course->name}}</td>
+                                <td>{{$semester->id}}</td>
+                                <td>{{$semester->name}}</td>
+                                <td><a class="button is-info " href="{{route('semesters.edit',$semester->id)}}"><img src="{{asset('img/update.png')}}" height="30" width="30"></a></td>
                                 <td>
-                                    @if($course->available==true)
-                                        {{'متاح للامتحان'}}
-                                    @else
-                                        {{'غير متاح للامتحان'}}
-                                    @endif
-                                </td>
-                                <td>{{$course->semester->name}}</td>
-                                <td><a class="button is-info " href="{{route('courses.edit',$course->id)}}"><img src="{{asset('img/update.png')}}" height="30" width="30"></a></td>
-                                <td>
-                                    {{Form::open(['route'=>['courses.destroy',$course->id],'method'=>'delete'])}}
+                                    {{Form::open(['route'=>['semesters.destroy',$semester->id],'method'=>'delete'])}}
                                     <button type="submit" class="button is-danger "><img src="{{asset('img/delete.png')}}" height="30" width="30"></button>
                                     {{Form::close()}}
                                 </td>
@@ -50,14 +40,12 @@
                 <div class="text-center">
                     <nav>
                         <ul class="pagination justify-content-end">
-                            {{$courses->links('vendor.pagination.bootstrap-4')}}
+                            {{$semesters->links('vendor.pagination.bootstrap-4')}}
                         </ul>
                     </nav>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 @endsection

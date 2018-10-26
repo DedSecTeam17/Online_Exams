@@ -21,8 +21,18 @@ class QuestionController extends Controller
      */
     public function index()
     {
+        $courses=Course::all();
         $questions=Question::where('admin_id',Auth::id())->orderBy('course_id','asc')->paginate(5);
-        return view('question.index')->withQuestions($questions);
+        return view('question.index')->withQuestions($questions)->withCourses($courses);
+    }
+
+
+    public function  getSpasticQuestionsForCourse(Request $request)
+    {
+        $courses=Course::all();
+
+        $questions=Question::where('course_id',$request->course_id)->orderBy('course_id','asc')->get();
+        return view('question.index')->withQuestions($questions)->withCourses($courses);;
     }
 
     /**

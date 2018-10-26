@@ -10,7 +10,7 @@
             <div class="column is-half">
                 <div class="box">
                     <div class="box-content">
-                        {!!Form::model($student, array('route' => array('students.update', $student->id), 'files' => true, 'method' => 'PUT')) !!}
+                        {!!Form::model($student, array('route' => array('users.update', $student->id), 'files' => true, 'method' => 'PUT')) !!}
                         {{----}}
                         <figure class="avatar">
                             <i class="fas fa-graduation-cap" style="font-size: xx-large"></i>
@@ -64,6 +64,15 @@
                                     <input id="password-confirm" type="password" class="input is-rounded is-fullwidth" name="password_confirmation" required>
                                 </div>
                             </div>
+
+                        {{ Form::label('title','semester:',['class'=>'is-pulled-left'])   }}<br>
+                        <div class="select is-rounded is-fullwidth" >
+                            <select name="semester_id">
+                                @foreach($semesters as $semester)
+                                    <option value="{{$semester->id}}">{{$semester->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         {{----}}
                         {{Form::submit('Update',array('class'=>'button is-success is-rounded is-fullwidth is-outlined ','style'=>'margin-top:2%','id'=>'mybtn'))}}
                         {!!Form::close()  !!}
