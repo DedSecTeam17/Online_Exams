@@ -6,6 +6,7 @@ use App\Course;
 use App\Semester;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class CourseController extends Controller
 {
@@ -136,4 +137,15 @@ class CourseController extends Controller
 
         //
     }
+
+
+        public function  search(Request $request)
+    {
+
+        $word=$request->word;
+        $courses=Course::where('name', 'LIKE', '%'.$word.'%')->paginate(5);
+
+            return view('course.index')->withCourses($courses);
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Result;
+use App\User;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -11,7 +12,7 @@ class ResultController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin')->except('show');
-        $this->middleware('auth:web')->except('index','edit','store','destroy','update');
+        $this->middleware('auth:web')->except('index','edit','store','destroy','update','search');
     }
 
 
@@ -96,5 +97,22 @@ class ResultController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function  search(Request $request)
+    {
+        $word=$request->word;
+        $users=User::where('name', 'LIKE', '%'.$word.'%')->paginate(5);
+
+        $results=null;
+        foreach ($users as $user)
+        {
+            $results=Result::where('user_id', 'LIKE', '%'.$word.'%')->paginate(5);
+
+        }
+
+
+        return $results;
     }
 }

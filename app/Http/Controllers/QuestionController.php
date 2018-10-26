@@ -32,7 +32,7 @@ class QuestionController extends Controller
         $courses=Course::all();
 
         $questions=Question::where('course_id',$request->course_id)->orderBy('course_id','asc')->get();
-        return view('question.index')->withQuestions($questions)->withCourses($courses);;
+        return view('question.index')->withQuestions($questions)->withCourses($courses);
     }
 
     /**
@@ -61,7 +61,8 @@ class QuestionController extends Controller
             'choice_b'=>'required',
             'choice_c'=>'required',
             'choice_d'=>'required',
-            'answer'=>'required'
+            'answer'=>'required',
+            'mark'=>'required'
         ]);
         $question=new Question();
         $question->question_name=$request->question_name;
@@ -71,7 +72,8 @@ class QuestionController extends Controller
         $question->choice_d=$request->choice_d;
         $question->answer=$request->answer;
         $question->admin_id=Auth::id();
-        $question->course_id=$request->course_id;;
+        $question->course_id=$request->course_id;
+        $question->mark=$request->mark;
 
         $question->save();
         return redirect()->route('questions.create');
@@ -118,7 +120,8 @@ class QuestionController extends Controller
             'choice_b'=>'required',
             'choice_c'=>'required',
             'choice_d'=>'required',
-            'answer'=>'required'
+            'answer'=>'required',
+            'mark'=>'required'
         ]);
         $question=Question::find($id);
         $question->question_name=$request->question_name;
@@ -127,6 +130,7 @@ class QuestionController extends Controller
         $question->choice_c=$request->choice_c;
         $question->choice_d=$request->choice_d;
         $question->answer=$request->answer;
+        $question->mark=$request->mark;
         $question->admin_id=Auth::id();
         $question->course_id=$request->course_id;;
 

@@ -21,11 +21,10 @@ Auth::routes();
 //Route::post('/register',['uses'=>'Auth\RegisterController@store','as'=>'register.store']);
 
 
+Route::Resource('/users', 'Auth\RegisterController');
 
-Route::Resource('/users','Auth\RegisterController');
 
-
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::prefix('admin')->group(function () {
@@ -35,25 +34,33 @@ Route::prefix('admin')->group(function () {
 });
 
 
-
-Route::Resource('/courses','CourseController');
-
-Route::Resource('/questions','QuestionController');
-
-Route::post('/questions/course/questions',['uses'=>'QuestionController@getSpasticQuestionsForCourse','as'=>'questions.course_questions']);
-
-Route::Resource('/students','UserController');
-
-Route::Resource('/results','ResultController');
+Route::Resource('/courses', 'CourseController');
 
 
-Route::Resource('/semesters','SemesterController');
+Route::post('/courses/search', 'CourseController@search')->name('course_search');
+
+Route::Resource('/questions', 'QuestionController');
+
+Route::post('/questions/course/questions', ['uses' => 'QuestionController@getSpasticQuestionsForCourse', 'as' => 'questions.course_questions']);
+
+Route::Resource('/students', 'UserController');
+
+Route::Resource('/results', 'ResultController');
 
 
-Route::get('/students/exam/{course_id}',['uses'=>'UserController@takeExam','as'=>'students.exam']);
+Route::post('/results/search', 'ResultController@search')->name('results_search');
 
 
-Route::post('/students/exam/store/{course_id}',['uses'=>'UserController@storeAnswer','as'=>'students.exam.store']);
+Route::Resource('/semesters', 'SemesterController');
+
+
+Route::get('/students/exam/{course_id}', ['uses' => 'UserController@takeExam', 'as' => 'students.exam']);
+
+
+Route::post('/students/exam/store/{course_id}', ['uses' => 'UserController@storeAnswer', 'as' => 'students.exam.store']);
+
+
+Route::post('/users/search', 'UserController@search')->name('students_search');
 
 
 

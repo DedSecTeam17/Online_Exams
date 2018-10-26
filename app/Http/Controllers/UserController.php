@@ -15,11 +15,12 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth:admin")->except('takeExam','storeAnswer');
+        $this->middleware("auth:admin")->except('takeExam', 'storeAnswer');
 
 
-        $this->middleware('auth:web')->except('index','create','edit','destroy','show','update');
+        $this->middleware('auth:web')->except('index', 'create', 'edit', 'destroy', 'show', 'update','search');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,45 +28,51 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::paginate(5);
-        return  view('user.index')->withUsers($users);
+        $users = User::paginate(5);
+        return view('user.index')->withUsers($users);
         //
     }
 
 
     public function takeExam($course_id)
     {
-        $exam_questions=Question::where('course_id',$course_id)->get();
-        return view('exam')->withExam_questions($exam_questions)->withCourse_id($course_id);;
+        $result = Result::where(['user_id' => Auth::id(), 'course_id' => $course_id])->get();
+        if (!$result->isEmpty()) {
+            Session::flash('You already take the exam !!', 'fail');
+            return redirect()->route('home');
+
+        } else {
+            $exam_questions = Question::where('course_id', $course_id)->get();
+            return view('exam')->withExam_questions($exam_questions)->withCourse_id($course_id);
+        }
+
     }
 
 
-    public  function  storeAnswer(Request $request,$course_id)
+    public function storeAnswer(Request $request, $course_id)
     {
-        $courses=Question::where('course_id',$course_id)->get();
-        $final_result=array();
-        $user_reuslt=0;
-        $full_result=0;
-        foreach ($courses as $eq){
-            $answer='answer'.$eq->id;
-            if ($request->$answer==$eq->answer)
-            {
-                $user_reuslt+=10;
-                $final_result['user_result']=$user_reuslt;
-
+        $questions = Question::where('course_id', $course_id)->get();
+        $final_result = array();
+        $user_reuslt = 0;
+        $full_result = 0;
+        foreach ($questions as $eq) {
+            $answer = 'answer' . $eq->id;
+            if ($request->$answer == $eq->answer) {
+                $user_reuslt += $eq->mark;
+                $final_result['user_result'] = $user_reuslt;
             }
-            $full_result+=10;
-            $final_result['full_result']=$full_result;
+            $full_result += $eq->mark;
+            $final_result['full_result'] = $full_result;
         }
-        $result=new Result();
-        $result->result=$user_reuslt;
-        $result->user_id=Auth::id();
-        $result->course_id=$course_id;
+        $result = new Result();
+        $result->result = $user_reuslt;
+        $result->user_id = Auth::id();
+        $result->course_id = $course_id;
+        $result->full_mark = $full_result;
+        $result->save();
 
-            $result->save();
 
-        Session::flash('success', 'Success you submit the exam successfully');
-        return redirect()->route('results.show',$result->id);
+        return redirect()->route('results.show', $result->id);
     }
 
     /**
@@ -84,7 +91,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -95,7 +102,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -106,12 +113,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $student=User::find($id);
+        $student = User::find($id);
 
         return view('user.edit')->withStudent($student);
         //
@@ -120,18 +127,18 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
 
 
-        $user=User::find($id);
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=bcrypt($request->password);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+//        $user->password=bcrypt($request->password);
 
         $user->update();
 
@@ -150,9 +157,18 @@ class UserController extends Controller
     public function destroy($id)
     {
 
-$user=User::find($id);
-$user->delete();
+        $user = User::find($id);
+        $user->delete();
         return redirect()->route('students.index');
         //
+    }
+
+
+    public function  search(Request $request)
+    {
+        $word=$request->word;
+        $users=User::where('name', 'LIKE', '%'.$word.'%')->paginate(5);
+
+              return view('user.index')->withUsers($users);;
     }
 }

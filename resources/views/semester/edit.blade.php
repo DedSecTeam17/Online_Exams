@@ -9,8 +9,8 @@
                     <div class="box-content">
                         {!!Form::model($semester, array('route' => array('semesters.update', $semester->id), 'files' => true, 'method' => 'PUT')) !!}
                         {{ Form::label('title','الفصل',['class'=>'is-pulled-right'])   }}
-                        {{Form::text('name',null,array('class'=>'input is-rounded','id'=>'first','maxlength'=>'255'))}}
-                        {{Form::submit('تعديل',array('class'=>'button is-info is-rounded is-fullwidth  ','style'=>'margin-top:2%','id'=>'mybtn'))}}
+                        {{Form::text('name',null,array('class'=>'input ','id'=>'first','maxlength'=>'255'))}}
+                        {{Form::submit('تعديل',array('class'=>'button is-info is-outlined is-fullwidth  ','style'=>'margin-top:2%','id'=>'mybtn'))}}
                         {!!Form::close()  !!}
                     </div>
                 </div>

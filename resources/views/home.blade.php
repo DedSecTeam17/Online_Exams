@@ -25,7 +25,7 @@
     </div>
 
     <hr style="background-color: gray; height: 0.1%">
-    <div class="columns is-multiline is-mobile">
+    <div class="columns is-multiline is-desktop">
         @foreach($courses as $course)
             <div class="column is-4 ">
                 <div class="box">

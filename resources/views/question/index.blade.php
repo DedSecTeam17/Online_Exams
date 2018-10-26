@@ -13,14 +13,14 @@
                 <div class="box-content">
                     <div class="box-content">
                         {!! Form::open(array('route'=>'questions.course_questions','data-parsley-validate'=>'','method'=>'POST'))  !!}
-                        <div class="select is-rounded is-fullwidth" >
+                        <div class="select      is-fullwidth" >
                             <select name="course_id">
                                 @foreach($courses as $course)
                                     <option value="{{$course->id}}">{{$course->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        {{Form::submit('search',array('class'=>'button is-primary is-rounded is-fullwidth  ','style'=>'margin-top:2%','id'=>'mybtn'))}}
+                        <button type="submit" class="button is-dark is-outlined  is-fullwidth" style="margin-top:2%"><img src="{{asset('img/search.png')}}" width="28" height="28"></button>
                         {!! Form::close()  !!}
                     </div>
                 </div>
@@ -28,48 +28,50 @@
         </div>
     </div>
         <div class="columns is-desktop" style="margin: 3%">
-            <div class="column is-10 is-offset-1">
+            <div class="column is-12">
                 <div class="box box-shadow">
                     <div class="box-content">
                         <div class="table__wrapper">
                             <table class="table is-narrow">
                                 <thead class="thead-dark">
                                 <tr>
+                                    <th><img src="{{asset('img/deletes.png')}}" height="24" width="24"></th>
+                                    <th><img src="{{asset('img/updates.png')}}" height="24" width="24"></th>
+                                    <th><img src="{{asset('img/courses.png')}}" height="24" width="24"></th>
+                                    <th><img src="{{asset('img/score.png')}}" height="24" width="24"></th>
+                                    <th><img src="{{asset('img/answer.png')}}" height="24" width="24"></th>
+                                    {{----}}
+                                    <th><img src="{{asset('img/ds.png')}}" height="24" width="24"></th>
+                                    <th><img src="{{asset('img/cs.png')}}" height="24" width="24"></th>
+                                    <th><img src="{{asset('img/bs.png')}}" height="24" width="24"></th>
+                                    <th><img src="{{asset('img/as.png')}}" height="24" width="24"></th>
+                                    {{----}}
+                                    <th><img src="{{asset('img/questions.png')}}" height="24" width="24"></th>
                                     <th>#</th>
-                                    <th>Question</th>
-                                    <th>choice A</th>
-                                    <th>choice B</th>
-                                    <th>choice C</th>
-                                    <th>choice D</th>
-                                    <th>Answer</th>
-                                    <th>Course Name</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($questions as $question)
                                     <tr>
-                                        <td>{{$question->id}}</td>
-                                        <td>{{$question->question_name}}</td>
-                                        <td>{{$question->choice_a}}</td>
-                                        <td>{{$question->choice_b}}</td>
-                                        <td>{{$question->choice_c}}</td>
-                                        <td>{{$question->choice_d}}</td>
-                                        <td>{{$question->answer}}</td>
-                                        <td>{{$question->course->name}}</td>
-
-
-                                        <td><a class="button is-info " href="{{route('questions.edit',$question->id)}}"><img
-                                                        src="{{asset('img/update.png')}}" height="30" width="30"></a>
-                                        </td>
                                         <td>
                                             {{Form::open(['route'=>['questions.destroy',$question->id],'method'=>'delete'])}}
                                             <button type="submit" class="button is-danger "><img
-                                                        src="{{asset('img/delete.png')}}" height="30" width="30">
+                                                        src="{{asset('img/delete.png')}}" height="24" width="24">
                                             </button>
                                             {{Form::close()}}
                                         </td>
+                                        <td><a class="button is-info " href="{{route('questions.edit',$question->id)}}"><img
+                                                        src="{{asset('img/update.png')}}" height="23" width="23"></a>
+                                        </td>
+                                        <td>{{$question->course->name}}</td>
+                                        <td>{{$question->mark}}</td>
+                                        <td>{{$question->answer}}</td>
+                                        <td>{{$question->choice_d}}</td>
+                                        <td>{{$question->choice_c}}</td>
+                                        <td>{{$question->choice_b}}</td>
+                                        <td>{{$question->choice_a}}</td>
+                                        <td>{{$question->question_name}}</td>
+                                        <td>{{$question->id}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -7,7 +7,7 @@
                 <div class="box-content">
                     <div class="text-center">
                         <i class="fas fa-trophy" style="font-size: xx-large; color: gold"></i>
-                        {{$result->result.'/'.($result->course->questions()->count())*10  }}
+                        {{$result->result.'/'.$result->full_mark }}
                     </div>
                 </div>
             </div>

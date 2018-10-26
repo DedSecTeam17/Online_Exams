@@ -4,12 +4,10 @@
 
 
 </head>
-<body >
+<body>
 @include('partial._nav')
 <div class="container-fluid" style="background-color: whitesmoke">
-
-
-    <div class="columns is-desktop">
+    <div class="columns is-mobile is-multiple">
         {{--Aside area here --}}
         @if(\Illuminate\Support\Facades\Auth::guard('admin')->check())
             <div class="column is-10">
@@ -17,18 +15,15 @@
                 @yield('content')
 
             </div>
-        <div class="column is-2 aside" style="width: 100%; background-color: white">
-            @include('partial._aside_nav')
-        </div>
-            @else
-
+            <div class="column is-2 aside" style=" background-color:  #22313f">
+                @include('partial._aside_nav')
+            </div>
+        @else
             <div class="column is-8 is-offset-2">
                 @include('partial._message')
                 @yield('content')
             </div>
-
         @endif
-
 
 
     </div>
@@ -47,7 +42,7 @@
         // Check if there are any navbar burgers
         if ($navbarBurgers.length > 0) {
             // Add a click event on each of them
-            $navbarBurgers.forEach( el => {
+            $navbarBurgers.forEach(el => {
                 el.addEventListener('click', () => {
 
                     // Get the target from the "data-target" attribute

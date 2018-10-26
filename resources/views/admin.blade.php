@@ -20,36 +20,41 @@
                 <div class="tile is-ancestor has-text-centered">
                     <div class="tile is-parent ">
                         <article class="tile is-child box is-info">
+
+
+                            <p class="subtitle"><img src="{{asset('img/student.png')}}"></p>
                             <p class="title">{{$students->count()}}</p>
-                            <p class="subtitle">طالب</p>
                         </article>
                     </div>
                     <div class="tile is-parent ">
                         <article class="tile is-child box">
+                            <p class="subtitle"><img src="{{asset('img/courses.png')}}"></p>
                             <p class="title">{{$courses->count()}}</p>
-                            <p class="subtitle">كورس</p>
                         </article>
                     </div>
                     <div class="tile is-parent">
                         <article class="tile is-child box">
+                            <p class="subtitle"><img src="{{asset('img/result.png')}}"></p>
                             <p class="title">{{$results->count()}}</p>
-                            <p class="subtitle">نتائج</p>
                         </article>
                     </div>
                     <div class="tile is-parent">
                         <article class="tile is-child box">
+                            <p class="subtitle"><img src="{{asset('img/questions.png')}}"></p>
                             <p class="title">{{$questions->count()}}</p>
-                            <p class="subtitle">اسئله</p>
                         </article>
                     </div>
                 </div>
             </section>
 
+
         </div>
-
-
-
     </div>
 
 
 @endsection
+
+
+
+
+

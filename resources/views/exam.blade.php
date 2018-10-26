@@ -10,7 +10,9 @@
 @extends('pages.main')
 @section('title','AllPosts')
 @section('content')
-    <div class="columns is-mobile" style="margin-top: 1%">
+    @include('partial._message')
+
+    <div class="columns is-desktop" style="margin-top: 1%">
         <div class="column is-8 is-offset-2">
             <div class="box">
                 <div class="box-content ">
@@ -28,7 +30,7 @@
             <div class="box">
                 <div class="box-content">
                     <div class="text-center">
-                        <div class="notification is-ebony">
+                        <div class="notification ">
                             <?php
                             $num = 0;
                             ?>
@@ -68,12 +70,9 @@
                                         </label>
                                     </li>
                                 </ul>
-                                
                                 <hr style="background-color: #2c3e50; height: 0.2%">
                             @endforeach
                         </div>
-
-
                     </div>
                 </div>
             </div>
